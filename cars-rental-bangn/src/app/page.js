@@ -1,7 +1,10 @@
+import CustomButton from "./components/CustomButton";
+
 export default function Home() {
   return (
     <div>
-      <h1>BangCars - Local Project</h1>
+      <h1>Home Page</h1>
+      <CustomButton />
     </div>
   );
 }
