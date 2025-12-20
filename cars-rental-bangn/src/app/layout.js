@@ -1,5 +1,6 @@
 import LayoutProvider from "../components/LayoutProvider";
 import "./globals.css";
+import "@/stylessheets/commonClasses.css";
 
 export const metadata = {
   title: "BangCars - Local Project",
