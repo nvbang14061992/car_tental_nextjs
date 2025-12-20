@@ -1,4 +1,4 @@
-import LayoutProvider from "./components/LayoutProvider";
+import LayoutProvider from "../components/LayoutProvider";
 import "./globals.css";
 
 export const metadata = {
