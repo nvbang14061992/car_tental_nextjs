@@ -1,13 +1,20 @@
 "use client";
 
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, App } from "antd";
 import Link from "antd/es/typography/Link";
 import { antdFieldValidation } from "@/helpers/validationHelpers";
+import axios from "axios";
+import { message } from "antd";
 
 function Login() {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post("/api/users/login", values);
+      message.success(response.data.message);
+    } catch (error) {
+      message.error(error.response.data.message || error.message);
+    }
   };
 
   return (
@@ -32,7 +39,7 @@ function Login() {
             </Form.Item>
 
             <Button type="primary" htmlType="submit">
-              Register
+              Login
             </Button>
 
             <Link href="/register">Don't have an account? Register</Link>

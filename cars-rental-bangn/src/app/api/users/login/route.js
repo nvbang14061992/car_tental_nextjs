@@ -38,9 +38,9 @@ export async function POST(request) {
 
     return response;
   } catch (error) {
-    console.error("Error registering user:", error);
+    console.error("Error login:", error);
     return NextResponse.json(
-      { message: "Internal Server Error", status: 500 },
+      { message: error.message || "Internal Server Error", status: 500 },
       { status: 500 }
     );
   }
