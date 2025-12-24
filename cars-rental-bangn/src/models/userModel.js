@@ -30,10 +30,10 @@ const userSchema = new mongoose.Schema(
 );
 
 // check if user model is already created
-if (mongoose.models.User) {
-  const userModel = mongoose.model("User");
+if (mongoose.models.users) {
+  const userModel = mongoose.model("users");
   mongoose.deleteModel(userModel.modelName);
 }
 
-const User = mongoose.model("Users", userSchema);
+const User = mongoose.model("users", userSchema);
 export default User;

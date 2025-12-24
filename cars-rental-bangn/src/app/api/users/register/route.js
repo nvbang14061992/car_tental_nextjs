@@ -32,8 +32,7 @@ export async function POST(request) {
     await newUser.save();
 
     return NextResponse.json(
-      { message: "User registered successfully", status: 201 },
-      { status: 201 }
+      { message: "User registered successfully"},
     );
   } catch (error) {
     console.error("Error registering user:", error);

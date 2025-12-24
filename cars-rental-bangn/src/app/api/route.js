@@ -3,5 +3,5 @@ import { connectDB } from "@/config/dbConfig";
 
 connectDB();
 export async function GET() {
-  return NextResponse.json({ data: "API is working!", status: 200 });
+  return NextResponse.json({ data: "API is working!" }, { status: 200 });
 }

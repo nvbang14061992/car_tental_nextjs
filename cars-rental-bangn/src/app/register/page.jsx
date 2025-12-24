@@ -1,13 +1,19 @@
 "use client";
 
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import Link from "antd/es/typography/Link";
 import { antdFieldValidation } from "@/helpers/validationHelpers";
+import axios from "axios";
 
 function Register() {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post("/api/users/register", values);
+      message.success(response.data.message);
+    } catch (error) {
+      message.error(error.response.data.message || error.message);
+    }
   };
 
   return (
