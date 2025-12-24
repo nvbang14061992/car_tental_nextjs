@@ -12,7 +12,7 @@ export async function validateJWT(request) {
       throw new Error("Invalid token");
     }
 
-    const userId = decoded._id;
+    const userId = decoded.id;
 
     return userId;
   } catch (error) {
