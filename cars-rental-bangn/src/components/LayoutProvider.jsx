@@ -18,6 +18,16 @@ function LayoutProvider({ children }) {
     }
   };
 
+  const onLogout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      message.success("Logged out successfully");
+      router.push("/login");
+    } catch (error) {
+      message.error(error.response?.data?.message || error.message);
+    }
+  };
+
   useEffect(() => {
     if (pathname !== "/login" && pathname !== "/register") {
       getCurrentUser();
@@ -43,7 +53,10 @@ function LayoutProvider({ children }) {
               >
                 {user?.name}
               </h1>
-              <i className="ri-logout-box-r-line text-white"></i>
+              <i
+                className="ri-logout-box-r-line text-white"
+                onClick={onLogout}
+              ></i>
             </div>
           </div>
         )}
