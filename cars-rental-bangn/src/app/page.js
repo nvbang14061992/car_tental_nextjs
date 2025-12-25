@@ -45,7 +45,7 @@ export default async function Home() {
           <p>Email: {currentUser.email}</p>
         </div>
       ) : (
-        <CustomButton title="Login" link="/login" />
+        <p></p>
       )}
     </div>
   );

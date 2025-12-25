@@ -6,12 +6,15 @@ import Link from "antd/es/typography/Link";
 import { antdFieldValidation } from "@/helpers/validationHelpers";
 import axios from "axios";
 import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 function Login() {
+  const router = useRouter();
   const onFinish = async (values) => {
     try {
       const response = await axios.post("/api/users/login", values);
       message.success(response.data.message);
+      router.push("/");
     } catch (error) {
       message.error(error.response.data.message || error.message);
     }
