@@ -5,14 +5,20 @@ import { Button, Form, Input, message } from "antd";
 import Link from "antd/es/typography/Link";
 import { antdFieldValidation } from "@/helpers/validationHelpers";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { SetLoading } from "@/redux/loadersSlice";
 
 function Register() {
+  const dispatch = useDispatch();
   const onFinish = async (values) => {
     try {
+      dispatch(SetLoading(true));
       const response = await axios.post("/api/users/register", values);
       message.success(response.data.message);
     } catch (error) {
       message.error(error.response.data.message || error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 

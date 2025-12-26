@@ -7,16 +7,22 @@ import { antdFieldValidation } from "@/helpers/validationHelpers";
 import axios from "axios";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { SetLoading } from "@/redux/loadersSlice";
 
 function Login() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const onFinish = async (values) => {
     try {
+      dispatch(SetLoading(true));
       const response = await axios.post("/api/users/login", values);
       message.success(response.data.message);
       router.push("/");
     } catch (error) {
       message.error(error.response.data.message || error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 

@@ -6,28 +6,37 @@ import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { SetCurrentUser } from "@/redux/usersSlice";
+import { SetLoading } from "@/redux/loadersSlice";
+import Spinner from "./Spinner";
 
 function LayoutProvider({ children }) {
   const { currentUser } = useSelector((state) => state.users);
+  const { loading } = useSelector((state) => state.loaders);
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
   const getCurrentUser = async () => {
     try {
+      dispatch(SetLoading(true));
       const response = await axios.get("/api/users/currentuser");
       dispatch(SetCurrentUser(response.data.data));
     } catch (error) {
       message.error(error.response?.data?.message || error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 
   const onLogout = async () => {
     try {
+      dispatch(SetLoading(true));
       await axios.get("/api/users/logout");
       message.success("Logged out successfully");
       router.push("/login");
     } catch (error) {
       message.error(error.response?.data?.message || error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 
@@ -39,6 +48,7 @@ function LayoutProvider({ children }) {
 
   return (
     <div>
+      {loading && <Spinner />}
       <ConfigProvider
         theme={{
           token: {
