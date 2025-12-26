@@ -48,7 +48,12 @@ function LayoutProvider({ children }) {
       >
         {pathname !== "/login" && pathname !== "/register" && (
           <div className="header bg-primary p-3 flex justify-between items-center">
-            <h1 className="text-xl text-white">BangCars</h1>
+            <h1
+              className="text-xl text-white cursor-pointer"
+              onClick={() => router.push("/")}
+            >
+              BangCars
+            </h1>
             <div className="flex gap-5 items-center">
               <h1
                 className="text-md text-white underline"
