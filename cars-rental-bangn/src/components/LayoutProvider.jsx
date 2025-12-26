@@ -4,15 +4,18 @@ import { ConfigProvider, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { SetCurrentUser } from "@/redux/usersSlice";
 
 function LayoutProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const { currentUser } = useSelector((state) => state.users);
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
   const getCurrentUser = async () => {
     try {
       const response = await axios.get("/api/users/currentuser");
-      setUser(response.data.data);
+      dispatch(SetCurrentUser(response.data.data));
     } catch (error) {
       message.error(error.response?.data?.message || error.message);
     }
@@ -51,7 +54,7 @@ function LayoutProvider({ children }) {
                 className="text-md text-white underline"
                 onClick={() => router.push("/profile")}
               >
-                {user?.name}
+                {currentUser?.name}
               </h1>
               <i
                 className="ri-logout-box-r-line text-white"

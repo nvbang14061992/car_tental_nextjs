@@ -1,3 +1,4 @@
+import ReduxStoreProvider from "@/components/ReduxStoreProvider";
 import LayoutProvider from "../components/LayoutProvider";
 import "./globals.css";
 import "@/stylessheets/commonClasses.css";
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <LayoutProvider>{children}</LayoutProvider>
+        <ReduxStoreProvider>
+          <LayoutProvider>{children}</LayoutProvider>
+        </ReduxStoreProvider>
       </body>
     </html>
   );

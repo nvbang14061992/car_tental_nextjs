@@ -1,5 +1,3 @@
-import CustomButton from "../components/CustomButton";
-
 export default async function Home() {
   return (
     <div>
